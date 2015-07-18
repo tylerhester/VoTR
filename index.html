@@ -2,114 +2,39 @@
 <html lang="en">
 <head>
 
-	<title>Voice Navigation!</title>
-	
-	<script src="annyang-master/annyang.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<link rel="stylesheet" href="style.css">
-	
-	<style>
-	#results {
-		background-color: #eee;
-		padding: 50px;
-		border: 1px solid #000;
-		width: 25px;
-	}
-	</style>
+<title>Voice Navigation!</title>
+
+<script src="annyang-master/annyang.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet" href="styles/style.css">
+
+<style>
+#results {
+	background-color: #eee;
+	padding: 50px;
+	border: 1px solid #000;
+	width: 25px;
+}
+</style>
 
 </head>
 <body style="background-color: silver;">
 
-<label id="buttonLabel" class="switch switch-green"> 
-        <input id="fancyCheckBox" type="checkbox" class="switch-input" onclick="validate()"> 
-        <span class="switch-label" data-on="On" data-off="Off"></span> 
-        <span class="switch-handle"></span>
-   </label>
-   <input type="text" class="text" id="textbox" size="193px" height="28px" style="margin-top:3px"/>
-   <button id="submitButton" type="button" value="Submit" style="margin-top:2px">Submit</button>
-
-<!-- 	<div id="results"></div> -->
-<!-- 	<p> -->
-<!-- 		Say 'green' <br /> Say 'red' <br /> Say 'purple' <br /> Say 'blue' <br /> Say any HTML color <br /> -->
-<!-- 	</p> -->
-	<br><br>
+	<label id="buttonLabel" class="switch switch-green"> 
+		<input id="fancyCheckBox" type="checkbox" class="switch-input" onclick="validate()"> 
+		<span class="switch-label" data-on="On" data-off="Off"></span> 
+		<span class="switch-handle"></span>
+	</label>
 	
-	<iframe class="browser" id="browser" height=100% width=100% frameborder="0" scrolling="no" src="https://si-organizertoweb.int.thomsonreuters.com/Home/launchapp" ></iframe>
+	<input type="text" class="text" id="textbox" size="193px" height="28px" style="margin-top: 3px" />
+	<button id="submitButton" type="button" value="Submit" style="margin-top: 2px">Submit</button>
+	
+	<br>
+	<br>
 
-	<script>
-		if (annyang)
-		{
-			var testBox  = document.getElementById('results')
-			var iFrame   = document.getElementById('browser')
-			var checkBox = document.getElementById('fancyCheckBox')
-			var textbox   = document.getElementById('textbox')
-			var paused   = false;
-
-			var color = function(color)
-			{
-				testBox.style.backgroundColor = color
-			};
-
-			function validate() {
-		        if (checkBox.checked) {
-					annyang.start(
-					{
-						autoRestart : false,
-						continuous : true
-					});
-		        }else if(paused){
-					annyang.abort();
-				}
-		    }
-
-			var website = function(search)
-			{
-				textbox.value = search;
-				if(search == 'Google')
-				{
-					iFrame.src = 'http://en.wikipedia.net';
-				} 
-				else if ( search == 'checkpoint learning' || search == 'Check point learning' || search == 'checkpoint')
-				{
-					iFrame.src = 'https://checkpointlearning.thomsonreuters.com/';
-				} 
-				else if(search == 'organizer' || search == 'OTW')
-				{
-					iFrame.src = 'https://si-organizertoweb.int.thomsonreuters.com/Home/launchapp';
-				}
-				else 
-				{
-					
-				}
-			};
-
-			var badResults = function(badWords){
-				textbox.value = badWords;
-			};
-
-			var commands =
-			{
-				'(optional) Set Color *color *extra' : color,
-				'(optional) Navigate to *website *extra' : website
-			};
-			
-			annyang.addCallback('resultMatch', function(){
-				checkBox.checked = false;
-				annyang.pause();
-			});
-
-			annyang.addCallback('resultNoMatch', function(){
-				annyag.pause();
-			});
-			
-			annyang.addCallback('end', function(){
-			});
-
-			annyang.addCallback('start', function(){
-			});
-
-			annyang.addCommands(commands);
-		}
-	</script>
+	<iframe class="browser" id="browser" height=100% width=100% frameborder="0" scrolling="no" src="https://si-organizertoweb.int.thomsonreuters.com/Home/launchapp"></iframe>
+	
+	<script type="text/javascript" src="javascript/otw.js"></script>
+	
 </body>
 </html>
