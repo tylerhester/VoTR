@@ -53,7 +53,7 @@ if (annyang)
 	var commands =
 	{
 		'(optional) Set Color *color *extra' : color,
-		'(optional) Navigate to *website *extra' : website
+		'(optional) Navigate to *website' : website
 	};
 
 	annyang.addCallback('resultMatch', function()
